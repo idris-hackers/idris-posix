@@ -29,3 +29,9 @@ getDirectoryContents s = do
             else do
               n <- dirent_d_name c
               f d (n :: xs)
+
+doesFileExist : String -> IO Bool
+doesFileExist s = map (/= 0) (mkForeign (FFun "idris_posix_is_file" [FString] FInt) s)
+
+doesDirectoryExist : String -> IO Bool
+doesDirectoryExist s = map (/= 0) (mkForeign (FFun "idris_posix_is_directory" [FString] FInt) s)
