@@ -1,18 +1,19 @@
 module System.Posix.Directory
 
-%include C "dirent-accessors.c"
+%include C "dirent_accessors.c"
+%include C "stat_wrappers.c"
 
 opendir : String -> IO Ptr
-opendir s = mkForeign (FFun "opendir" [FString] FPtr) s
+opendir s = foreign FFI_C "opendir" (String -> IO Ptr) s
 
 closedir : Ptr -> IO ()
-closedir p = mkForeign (FFun "closedir" [FPtr] FUnit) p
+closedir p = foreign FFI_C "closedir" (Ptr -> IO Unit) p
 
 readdir : Ptr -> IO Ptr
-readdir p = mkForeign (FFun "readdir" [FPtr] FPtr) p
+readdir p = foreign FFI_C "readdir" (Ptr -> IO Ptr) p
 
 dirent_d_name : Ptr -> IO String
-dirent_d_name p = mkForeign (FFun "idris_posix_dirent_d_name" [FPtr] FString) p
+dirent_d_name p = foreign FFI_C "idris_posix_dirent_d_name" (Ptr -> IO String) p
 
 getDirectoryContents : String -> IO (List String)
 getDirectoryContents s = do
@@ -31,7 +32,7 @@ getDirectoryContents s = do
               f d (n :: xs)
 
 doesFileExist : String -> IO Bool
-doesFileExist s = map (/= 0) (mkForeign (FFun "idris_posix_is_file" [FString] FInt) s)
+doesFileExist s = map (/= 0) (foreign FFI_C "idris_posix_is_file" (String -> IO Int) s)
 
 doesDirectoryExist : String -> IO Bool
-doesDirectoryExist s = map (/= 0) (mkForeign (FFun "idris_posix_is_directory" [FString] FInt) s)
+doesDirectoryExist s = map (/= 0) (foreign FFI_C "idris_posix_is_directory" (String -> IO Int) s)
