@@ -1,0 +1,4 @@
+package posix
+
+sourcedir = src
+modules = System.Posix.Directory
