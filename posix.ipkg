@@ -2,4 +2,7 @@ package posix
 
 sourcedir = src
 modules = System.Posix.Directory
-objs = dirent_accessors.c, stat_wrappers.c
+        , System.Posix.Time
+objs = dirent_accessors.c
+     , stat_wrappers.c
+     , time_wrappers.c
