@@ -3,6 +3,12 @@ package posix
 sourcedir = src
 modules = System.Posix.Directory
         , System.Posix.Time
+	, System.Posix.Signal
+	, System.Posix.Syslog
+	, System.Posix.Test.Signal
 objs = dirent_accessors.c
      , stat_wrappers.c
      , time_wrappers.c
+     , signal_wrappers.c
+
+tests = System.Posix.Test.Signal.test_install_handler
