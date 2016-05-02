@@ -1,15 +1,14 @@
 #include <signal.h>
 
-inline struct sigaction * install_handler (int signum, void (*handler)(int))
+inline int install_handler (int signum, void (*handler)(int))
 {
   int rc;
   struct sigaction *act;
   act = calloc (1, sizeof (struct sigaction));
   if (act == NULL)
-    return act;
+    return -1;
   act->sa_handler = handler;
   rc = sigaction (signum, act, NULL);
-  if (rc == 0)
-    return act;
-  return NULL;  
+  free (act);
+  return rc;  
 }

@@ -15,7 +15,7 @@ my_handler_wrapper = foreign FFI_C "%wrapper" ((CFnPtr Signal_handler) -> IO Ptr
 export
 test_install_handler : IO ()
 test_install_handler = do
-  install_signal_handler SIGINT my_handler_wrapper
+  rc <- install_signal_handler SIGINT my_handler_wrapper
   putStrLn "Now press Ctrl-C to interrupt"
   usleep 100000000
   putStrLn "Test completed. Did you see a message indicating signal 2 was handled?"

@@ -10,16 +10,16 @@ public export
 Signal_handler : Type
 Signal_handler = (sig_num : Int) -> ()
 
-install_handler : Int -> Ptr -> IO Ptr
-install_handler signum handler = foreign FFI_C "install_handler" (Int -> Ptr -> IO Ptr) signum handler
+install_handler : Int -> Ptr -> IO Int
+install_handler signum handler = foreign FFI_C "install_handler" (Int -> Ptr -> IO Int) signum handler
 
 ||| Install a new signal handler for @sig_num
 |||
 ||| @sig_num - the signal to be handled
 ||| @handler - the wrapper for the Idris handler function (define as foreign FFI_C "%wrapper" ((CfnPtr Signal_handler) -> IO Ptr) (MkCFnPtr name-of-idris-routine)
-||| Returns null on error and a pointer to the allocated struct sigaction on success
+||| Returns -1 on error and 0 on success
 export
-install_signal_handler : (sig_num : Int) -> (handler: IO Ptr) -> IO Ptr
+install_signal_handler : (sig_num : Int) -> (handler: IO Ptr) -> IO Int
 install_signal_handler sig_num handler = do
   wr <- handler
   install_handler sig_num wr
