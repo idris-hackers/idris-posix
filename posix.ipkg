@@ -11,6 +11,7 @@ objs = dirent_accessors.c
      , stat_wrappers.c
      , time_wrappers.c
      , signal_wrappers.c
+     , syslog_wrappers.c     
 
 tests = System.Posix.Test.Syslog.test_syslog
       , System.Posix.Test.Signal.test_install_handler -- keep this test last
