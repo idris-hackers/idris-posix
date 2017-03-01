@@ -20,13 +20,13 @@ getDirectoryContents s = do
     d <- opendir s
     c <- f d []
     closedir d
-    return (reverse c)
+    pure (reverse c)
   where f : Ptr -> List String -> IO (List String)
         f d xs = do
             c <- readdir d
             n <- nullPtr c
             if n
-            then return xs
+            then pure xs
             else do
               n <- dirent_d_name c
               f d (n :: xs)
