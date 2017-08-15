@@ -1,0 +1,8 @@
+os: osx
+cache:
+  directories:
+    - $HOME/Library/Caches/Homebrew
+install:
+  - brew install idris
+script:
+  - idris --testpkg posix.ipkg
