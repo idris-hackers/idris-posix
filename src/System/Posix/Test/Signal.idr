@@ -17,6 +17,6 @@ test_install_handler : IO ()
 test_install_handler = do
   rc <- install_signal_handler SIGINT my_handler_wrapper
   putStrLn "Now press Ctrl-C to interrupt"
-  usleep 100000000
+  usleep 1000000
   putStrLn "Test completed. Did you see a message indicating signal 2 was handled?"
 
