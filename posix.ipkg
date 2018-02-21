@@ -2,6 +2,7 @@ package posix
 
 sourcedir = src
 modules = System.Posix.Directory
+        , System.Posix.Files
         , System.Posix.Time
         , System.Posix.Signal
         , System.Posix.Syslog
@@ -13,6 +14,7 @@ objs = dirent_accessors.c
      , signal_wrappers.c
      , syslog_wrappers.c
      , getcwd_wrapper.c
+     , files_wrappers.c
      , create_dir_wrappers.c
 
 tests = System.Posix.Test.Syslog.test_syslog
